@@ -1,0 +1,61 @@
+<div class="row text-center">
+    <div class="col-md-12 text-center">
+    <?php if($this->event && $gender){ ?>
+        <h1><?= $this->event->getName()?></h1>
+        <h2><?= "Classement ".$gender?></h2>
+    <?php } ?>
+    </div>
+</div>
+
+<div class="row mt-20">
+    <div class="col-md-12 text-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">Tri</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+            <?php if($this->event && $this->gender){ ?>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'bib_asc')) ?>">Dossard croissant</a></li>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'bib_desc')) ?>">Dossard décroissants</a></li>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'alpha_asc')) ?>">Alphabétique</a></li>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'alpha_desc')) ?>">Alphabétique décroissants</a></li>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'time_asc')) ?>">Temps</a></li>
+                <li><a href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => $gender,'sorting' => 'time_desc')) ?>">temps décroissant</a></li>
+            <?php } ?>
+            </ul>
+        </div>
+
+
+    <div class="table-responsive mt-20">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Dossard</td>
+                            <td>Nom</td>
+                            <td>Prénom</td>
+                            <td>Temps</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($this->participants){ ?>
+                            <?php
+                            /** @var \Application\Entity\User $participant */
+                            foreach($this->participants as $participant){ ?>
+                                <tr>
+                                    <td><?=$participant->getBibNumber()?></td>
+                                    <td><?=$participant->getLastName()?></td>
+                                    <td><?=$participant->getFirstName()?></td>
+                                    <td><?=$participant->getTime()->format('H:i:s')?></td>
+                                </tr>
+                            <?php } ?>
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

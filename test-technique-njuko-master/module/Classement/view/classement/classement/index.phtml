@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1>Classements</h1>
+    </div>
+</div>
+
+<div class="table-responsive mt-20">
+            <table class="table">
+                <tbody>
+                    <?php if($this->events){ ?>
+                        <?php
+                        /** @var Event $event */
+                        foreach($this->events as $event){ ?>
+                            <tr>
+                                <td><?=$event->getName()?></td>
+                                <td></td>
+                                <td class="text-right">
+                                    <a class="btn btn-sm btn-default" href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => 'general','sorting'=>'time_asc')) ?>">Classement général</a>
+                                    <a class="btn btn-sm btn-default" href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => 'femmes','sorting'=>'time_asc')) ?>">Classement femmes</a>
+                                    <a class="btn btn-sm btn-default" href="<?= $this->url('classement/classement', array('id' => $event->getId(),'name' => $event->getName(),'gender' => 'hommes','sorting'=>'time_asc')) ?>">Classement hommes</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+
+                </tbody>
+            </table>
+        </div>
